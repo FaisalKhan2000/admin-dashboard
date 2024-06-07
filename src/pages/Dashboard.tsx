@@ -8,7 +8,7 @@ const userImg =
 
 const Dashboard = () => {
   return (
-    <div className="adminContainer">
+    <div className="admin-container">
       <AdminSidebar />
 
       <main className="dashboard">
@@ -22,7 +22,7 @@ const Dashboard = () => {
         </div>
 
         {/* section */}
-        <section className="widgetContainer">
+        <section className="widget-container">
           <WidgetItem
             percent={40}
             amount={true}
@@ -31,26 +31,36 @@ const Dashboard = () => {
             color="rgb(0,155,255)"
           />
           <WidgetItem
-            percent={40}
-            amount={true}
-            value={340000}
-            heading="Revenue"
-            color="rgb(0,155,255)"
+            percent={-14}
+            value={400}
+            heading="Users"
+            color="rgb(0,198,202)"
           />
           <WidgetItem
-            percent={40}
-            amount={true}
-            value={340000}
-            heading="Revenue"
-            color="rgb(0,155,255)"
+            percent={80}
+            value={23000}
+            heading="Transactions"
+            color="rgb(255 196 0)"
           />
           <WidgetItem
-            percent={40}
-            amount={true}
-            value={340000}
-            heading="Revenue"
-            color="rgb(0,155,255)"
+            percent={30}
+            value={1000}
+            heading="Products"
+            color="rgb(76 0 255)"
           />
+        </section>
+
+        {/* graph container */}
+        <section className="graph-container">
+          <div className="revenue-chart">
+            <h2>Revenue & Transaction</h2>
+            {/* Graph here */}
+          </div>
+
+          <div className="dashboard-categories">
+            <h2>Inventory</h2>
+            <div></div>
+          </div>
         </section>
       </main>
     </div>
@@ -70,10 +80,10 @@ const WidgetItem = ({
   value,
   percent,
   color,
-  amount,
+  amount = false,
 }: WidgetItemProps) => (
   <article className="widget">
-    <div className="widgetInfo">
+    <div className="widget-info">
       <p>{heading}</p>
       <h4>{amount ? `$${value}` : value}</h4>
       {percent > 0 ? (
@@ -87,8 +97,16 @@ const WidgetItem = ({
       )}
     </div>
 
-    <div className="widgetCircle">
-      <span color={color}>{percent}%</span>
+    <div
+      className="widget-circle"
+      style={{
+        background: `conic-gradient(
+          ${color} ${(Math.abs(percent) / 100) * 360}deg,
+          rgb(255, 255, 255) 0
+      )`,
+      }}
+    >
+      <span style={{ color }}>{percent}%</span>
     </div>
   </article>
 );
