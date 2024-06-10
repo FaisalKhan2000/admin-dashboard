@@ -2,6 +2,7 @@ import { FaRegBell } from "react-icons/fa";
 import AdminSidebar from "../components/AdminSidebar";
 import { BsSearch } from "react-icons/bs";
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
+import data from "../assets/data.json";
 
 const userImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s";
@@ -59,7 +60,17 @@ const Dashboard = () => {
 
           <div className="dashboard-categories">
             <h2>Inventory</h2>
-            <div></div>
+            <div>
+              {/* <CategoryItem heading="Laptops" value={70} color="red" /> */}
+              {data.categories.map((item) => (
+                <CategoryItem
+                  key={item.value}
+                  heading={item.heading}
+                  value={item.value}
+                  color={`hsl(${item.value * 4}, ${item.value}%, 50%)`}
+                />
+              ))}
+            </div>
           </div>
         </section>
       </main>
@@ -109,6 +120,27 @@ const WidgetItem = ({
       <span style={{ color }}>{percent}%</span>
     </div>
   </article>
+);
+
+interface CategoryItemProps {
+  color: string;
+  value: number;
+  heading: string;
+}
+
+const CategoryItem = ({ color, value, heading }: CategoryItemProps) => (
+  <div className="category-item">
+    <h5>{heading}</h5>
+    <div>
+      <div
+        style={{
+          backgroundColor: color,
+          width: `${value}%`,
+        }}
+      ></div>
+    </div>
+    <span>{value}%</span>
+  </div>
 );
 
 export default Dashboard;
