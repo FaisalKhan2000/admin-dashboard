@@ -3,6 +3,8 @@ import AdminSidebar from "../components/AdminSidebar";
 import { BsSearch } from "react-icons/bs";
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 import data from "../assets/data.json";
+import { BarChart, DoughnutChart } from "../components/Charts";
+import { BiMaleFemale } from "react-icons/bi";
 
 const userImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s";
@@ -56,6 +58,16 @@ const Dashboard = () => {
           <div className="revenue-chart">
             <h2>Revenue & Transaction</h2>
             {/* Graph here */}
+
+            <BarChart
+              data_1={[200, 444, 343, 556, 778, 455, 990]}
+              data_2={[300, 144, 433, 655, 237, 755, 190]}
+              title_1="Revenue"
+              title_2="Transaction"
+              bgColor_1="rgb(0, 155, 255)"
+              bgColor_2="rgb(53, 162, 235, 0.8)"
+              // horizontal={true}
+            />
           </div>
 
           <div className="dashboard-categories">
@@ -72,6 +84,28 @@ const Dashboard = () => {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* transaction container */}
+        <section className="transaction-container">
+          <div className="gender-chart">
+            <h2>Gender Ratio</h2>
+
+            <DoughnutChart
+              labels={["Female", "Male"]}
+              data={[12, 19]}
+              backgroundColor={[
+                "hsl(340, 82%, 56%)",
+                "rgba(53, 162, 235, 0.8)",
+              ]}
+              cutout={90}
+            />
+            <p>
+              <BiMaleFemale />
+            </p>
+          </div>
+
+          {/* Table */}
         </section>
       </main>
     </div>
