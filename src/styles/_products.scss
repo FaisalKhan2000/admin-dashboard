@@ -1,7 +1,7 @@
 .dashboard-product-box {
   background-color: white;
   padding: 2rem;
-  overflow: auto;
+  overflow-y: auto;
   @include square(100%);
 }
 
