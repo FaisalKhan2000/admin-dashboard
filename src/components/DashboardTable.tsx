@@ -7,28 +7,53 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  ColumnDef,
+  createColumnHelper,
 } from "@tanstack/react-table";
 import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from "react-icons/ai";
+import { transaction } from "../assets/data.json";
 
-interface TableHOCProps<T extends Record<string, unknown>> {
-  columns: ColumnDef<T>[];
-  data: T[];
-  containerClassname: string;
-  heading: string;
-  showPagination?: boolean;
+interface DataInterface {
+  id: string;
+  amount: number;
+  quantity: number;
+  discount: number;
+  status: string;
 }
 
-function TableHOC<T extends Record<string, unknown>>({
-  columns,
-  data,
-  containerClassname,
-  heading,
-  showPagination = false,
-}: TableHOCProps<T>) {
+const columnHelper = createColumnHelper<DataInterface>();
+
+const columns = [
+  columnHelper.accessor("id", {
+    header: "ID",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("amount", {
+    header: "Amount",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("quantity", {
+    header: "Quantity",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("discount", {
+    header: "Discount",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+    cell: (info) => info.getValue(),
+    footer: (info) => info.column.id,
+  }),
+];
+
+const DashboardTable = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
 
@@ -37,7 +62,7 @@ function TableHOC<T extends Record<string, unknown>>({
   };
 
   const table = useReactTable({
-    data,
+    data: transaction, // Cast to unknown first, then to DataInterface[]
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -52,14 +77,10 @@ function TableHOC<T extends Record<string, unknown>>({
   });
 
   return (
-    <div className={containerClassname}>
-      <h2>{heading}</h2>
-      <input
-        type="text"
-        value={filtering}
-        onChange={(e) => setFiltering(e.target.value)}
-      />
-      <table className="w3-table-all w3-hoverable">
+    <div className="transaction-box">
+      <h2 className="heading">Top Transaction</h2>
+
+      <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -96,46 +117,9 @@ function TableHOC<T extends Record<string, unknown>>({
             </tr>
           ))}
         </tbody>
-
-        {showPagination && (
-          <tfoot>
-            <tr>
-              <td colSpan={columns.length}>
-                <div className="w3-bar">
-                  <button
-                    onClick={() => table.setPageIndex(0)}
-                    className="w3-button w3-black"
-                  >
-                    First Page
-                  </button>
-                  <button
-                    disabled={!table.getCanPreviousPage()}
-                    onClick={() => table.previousPage()}
-                    className="w3-button w3-teal"
-                  >
-                    Previous Page
-                  </button>
-                  <button
-                    disabled={!table.getCanNextPage()}
-                    onClick={() => table.nextPage()}
-                    className="w3-button w3-black"
-                  >
-                    Next Page
-                  </button>
-                  <button
-                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                    className="w3-button w3-teal"
-                  >
-                    Last Page
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tfoot>
-        )}
       </table>
     </div>
   );
-}
+};
 
-export default TableHOC;
+export default DashboardTable;
