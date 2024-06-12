@@ -63,13 +63,13 @@ const AdminSidebar = () => {
             location={location}
           />
           <Li
-            url="/admin/pie"
+            url="/admin/chart/pie"
             text="Pie"
             Icon={FaChartPie}
             location={location}
           />
           <Li
-            url="/admin/line"
+            url="/admin/chart/line"
             text="Line"
             Icon={FaChartLine}
             location={location}

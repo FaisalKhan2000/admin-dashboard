@@ -32,31 +32,28 @@ interface BarChartProps {
   title_2: string;
   bgColor_1: string;
   bgColor_2: string;
-  label?: string[];
+  labels?: string[];
 }
 
 export const BarChart = ({
-  horizontal,
   data_1 = [],
   data_2 = [],
   title_1,
   title_2,
   bgColor_1,
   bgColor_2,
-  label = months,
+  horizontal = false,
+  labels = months,
 }: BarChartProps) => {
   const options: ChartOptions<"bar"> = {
     responsive: true,
     indexAxis: horizontal ? "y" : "x",
-
     plugins: {
       legend: {
         display: false,
-        position: "top" as const,
       },
       title: {
         display: false,
-        text: "Chart.js Bar Chart",
       },
     },
 
@@ -76,7 +73,7 @@ export const BarChart = ({
   };
 
   const data: ChartData<"bar", number[], string> = {
-    labels: label,
+    labels,
     datasets: [
       {
         label: title_1,
@@ -96,7 +93,8 @@ export const BarChart = ({
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+
+  return <Bar width={horizontal ? "200%" : ""} options={options} data={data} />;
 };
 
 interface DoughnutChartProps {

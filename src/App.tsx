@@ -13,6 +13,9 @@ const ProductManagement = lazy(
 const TransactionManagement = lazy(
   () => import("./pages/management/TransactionManagement")
 );
+const BarCharts = lazy(() => import("./pages/charts/BarCharts"));
+const PieCharts = lazy(() => import("./pages/charts/PieCharts"));
+const LineCharts = lazy(() => import("./pages/charts/LineCharts"));
 
 const router = createBrowserRouter([
   {
@@ -49,11 +52,33 @@ const router = createBrowserRouter([
   },
 
   // Charts
-
+  {
+    path: "admin/chart/bar",
+    element: (
+      <SuspenseWrapper>
+        <BarCharts />
+      </SuspenseWrapper>
+    ),
+  },
+  {
+    path: "admin/chart/pie",
+    element: (
+      <SuspenseWrapper>
+        <PieCharts />
+      </SuspenseWrapper>
+    ),
+  },
+  {
+    path: "admin/chart/line",
+    element: (
+      <SuspenseWrapper>
+        <LineCharts />
+      </SuspenseWrapper>
+    ),
+  },
   // Apps
 
   // management
-
   {
     path: "admin/product/new",
     element: (
