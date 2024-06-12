@@ -1,11 +1,14 @@
 import AdminSidebar from "../components/AdminSidebar";
+import TransactionTable from "../components/TransactionTable";
 
 const Transaction = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
 
-      <main>mmamajaja</main>
+      <main>
+        <TransactionTable />
+      </main>
     </div>
   );
 };

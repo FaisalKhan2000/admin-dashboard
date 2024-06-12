@@ -1,11 +1,14 @@
 import AdminSidebar from "../components/AdminSidebar";
+import CustomerTable from "../components/CustomerTable";
 
 const Customers = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
 
-      <main>mmamajaja</main>
+      <main>
+        <CustomerTable />
+      </main>
     </div>
   );
 };
