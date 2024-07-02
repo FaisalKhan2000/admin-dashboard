@@ -16,6 +16,7 @@ const TransactionManagement = lazy(
 const BarCharts = lazy(() => import("./pages/charts/BarCharts"));
 const PieCharts = lazy(() => import("./pages/charts/PieCharts"));
 const LineCharts = lazy(() => import("./pages/charts/LineCharts"));
+const Coupon = lazy(() => import("./pages/apps/Coupon"));
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,15 @@ const router = createBrowserRouter([
     ),
   },
   // Apps
+
+  {
+    path: "admin/app/coupon",
+    element: (
+      <SuspenseWrapper>
+        <Coupon />
+      </SuspenseWrapper>
+    ),
+  },
 
   // management
   {
